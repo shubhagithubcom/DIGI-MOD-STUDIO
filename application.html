@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Applications of Digital Modulation Techniques</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #2c3e50;
+            font-size: 2.5rem;
+            position: relative;
+        }
+
+        h1::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(to right, #3498db, #9b59b6);
+            margin: 10px auto;
+            border-radius: 2px;
+        }
+
+        .app-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+        }
+
+        .app-card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .app-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .app-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, #3498db, #9b59b6);
+        }
+
+        .app-image {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 15px;
+            object-fit: contain;
+        }
+
+        .app-number {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #3498db;
+            margin-bottom: 10px;
+        }
+
+        .app-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .app-desc {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-top: auto;
+        }
+
+        @media (max-width: 768px) {
+            .app-list {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Animation for cards */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .app-card {
+            opacity: 0;
+            animation: fadeInUp 0.5s forwards;
+        }
+
+        /* Add delay for each card */
+        .app-card:nth-child(1) { animation-delay: 0.1s; }
+        .app-card:nth-child(2) { animation-delay: 0.2s; }
+        .app-card:nth-child(3) { animation-delay: 0.3s; }
+        .app-card:nth-child(4) { animation-delay: 0.4s; }
+        .app-card:nth-child(5) { animation-delay: 0.5s; }
+        .app-card:nth-child(6) { animation-delay: 0.6s; }
+        .app-card:nth-child(7) { animation-delay: 0.7s; }
+        .app-card:nth-child(8) { animation-delay: 0.8s; }
+        .app-card:nth-child(9) { animation-delay: 0.9s; }
+        .app-card:nth-child(10) { animation-delay: 1.0s; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Applications of Digital Modulation Techniques</h1>
+        <div class="app-list">
+            <div class="app-card" onclick="showDetails('Military communication systems use digital modulation for secure, encrypted transmissions that are resistant to jamming and interception. Techniques like QAM and PSK are commonly employed.')">
+                <img src="https://cdn-icons-png.flaticon.com/512/1534/1534938.png" alt="Military Communication" class="app-image">
+                <div class="app-number">1</div>
+                <div class="app-name">Military Communication Systems</div>
+                <div class="app-desc">Military communication systems use digital modulation for secure, encrypted transmissions that are resistant to jamming and interception. Techniques like QAM and PSK are commonly employed.</div>
+            </div>
+            
+            <div class="app-card" onclick="showDetails('Wireless communications rely on digital modulation (like QPSK, OFDM) to transmit data over radio frequencies efficiently, used in WiFi, Bluetooth, and cellular networks.')">
+                <img src="https://cdn-icons-png.flaticon.com/512/3659/3659898.png" alt="Wireless Communication" class="app-image">
+                <div class="app-number">2</div>
+                <div class="app-name">Wireless Communications</div>
+                <div class="app-desc">'Wireless communications rely on digital modulation (like QPSK, OFDM) to transmit data over radio frequencies efficiently, used in WiFi, Bluetooth, and cellular networks.</div>
+            </div>
+            
+            <div class="app-card" onclick="showDetails('Radar systems use digital modulation techniques to encode information in the transmitted pulses, enabling accurate target detection and tracking.')">
+                <img src="https://cdn-icons-png.flaticon.com/512/1534/1534946.png" alt="Radar Systems" class="app-image">
+                <div class="app-number">3</div>
+                <div class="app-name">Radar Systems</div>
+                <div class="app-desc">Radar systems use digital modulation techniques to encode information in the transmitted pulses, enabling accurate target detection and tracking.</div>
+            </div>
+            
+            <div class="app-card" onclick="showDetails('Digital broadcasting (TV, radio) uses modulation like QAM and COFDM to transmit high-quality audio/video signals efficiently over the airwaves.')">
+                <img src="https://cdn-icons-png.flaticon.com/512/3659/3659899.png" alt="Digital Broadcasting" class="app-image">
+                <div class="app-number">4</div>
+                <div class="app-name">Digital Broadcasting</div>
+                <div class="app-desc">Digital broadcasting (TV, radio) uses modulation like QAM and COFDM to transmit high-quality audio/video signals efficiently over the airwaves.</div>
+            </div>
+            
+            <div class="app-card" onclick="showDetails('Data transmission systems employ digital modulation to convert digital data into analog signals for transmission over various media with minimal errors.')">
+                <img src="https://cdn-icons-png.flaticon.com/512/1928/1928846.png" alt="Data Transmission" class="app-image">
+                <div class="app-number">5</div>
+                <div class="app-name">Data Transmission</div>
+                <div class="app-desc">Data transmission systems employ digital modulation to convert digital data into analog signals for transmission over various media with minimal errors.</div>
+            </div>
+            
+            <div class="app-card" onclick="showDetails('Mobile communication systems (4G/5G) use advanced digital modulation schemes like QAM and OFDMA to achieve high data rates and spectral efficiency.')">
+                <img src="https://cdn-icons-png.flaticon.com/512/2541/2541979.png" alt="Mobile Communication" class="app-image">
+                <div class="app-number">6</div>
+                <div class="app-name">Mobile Communication Systems</div>
+                <div class="app-desc">Mobile communication systems (4G/5G) use advanced digital modulation schemes like QAM and OFDMA to achieve high data rates and spectral efficiency.</div>
+            </div>
+            
+            <div class="app-card" onclick="showDetails('Air traffic control systems use digitally modulated signals for reliable communication between aircraft and ground stations, ensuring flight safety.')">
+                <img src="https://cdn-icons-png.flaticon.com/512/1534/1534943.png" alt="Air Traffic Control" class="app-image">
+                <div class="app-number">7</div>
+                <div class="app-name">Air Traffic Control</div>
+                <div class="app-desc">Air traffic control systems use digitally modulated signals for reliable communication between aircraft and ground stations, ensuring flight safety.</div>
+            </div>
+            
+            <div class="app-card" onclick="showDetails('Satellite communication employs digital modulation to overcome signal degradation over long distances, using techniques like QPSK and BPSK.')">
+                <img src="https://cdn-icons-png.flaticon.com/512/1534/1534949.png" alt="Satellite Communication" class="app-image">
+                <div class="app-number">8</div>
+                <div class="app-name">Satellite Communication</div>
+                <div class="app-desc">Satellite communication employs digital modulation to overcome signal degradation over long distances, using techniques like QPSK and BPSK.</div>
+            </div>
+            
+            <div class="app-card" onclick="showDetails('Weather monitoring systems use digitally modulated signals to transmit meteorological data from remote sensors and satellites.')">
+                <img src="https://cdn-icons-png.flaticon.com/512/2698/2698241.png" alt="Weather Monitoring" class="app-image">
+                <div class="app-number">9</div>
+                <div class="app-name">Weather Monitoring System</div>
+                <div class="app-desc">Weather monitoring systems use digitally modulated signals to transmit meteorological data from remote sensors and satellites.</div>
+            </div>
+            
+            <div class="app-card" onclick="showDetails('Optical fiber communications use digital modulation (like PAM, QAM) to encode data in light pulses for high-speed, long-distance transmission.')">
+                <img src="https://cdn-icons-png.flaticon.com/512/1534/1534939.png" alt="Optical Fibers" class="app-image">
+                <div class="app-number">10</div>
+                <div class="app-name">Optical Fibers</div>
+                <div class="app-desc">'Optical fiber communications use digital modulation (like PAM, QAM) to encode data in light pulses for high-speed, long-distance transmission.</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function to show details when a card is clicked
+        function showDetails(message) {
+            alert(message);
+        }
+
+        // Add hover effect with JavaScript as fallback for older browsers
+        document.querySelectorAll('.app-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px)';
+                this.style.boxShadow = '0 10px 25px rgba(0, 0, 0, 0.15)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = '';
+                this.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)';
+            });
+        });
+    </script>
+</body>
+</html>

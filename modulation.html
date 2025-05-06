@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Modulation Waveform Generator</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f7fa;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+        }
+        .input-section {
+            background-color: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .output-section {
+            background-color: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        select, input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        .chart-container {
+            position: relative;
+            height: 250px;
+            margin-bottom: 30px;
+        }
+        .results {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        .result-label {
+            font-weight: 600;
+        }
+        .modulation-info {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e8f4f8;
+            border-radius: 5px;
+        }
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Digital Modulation Waveform Generator</h1>
+    
+    <div class="container">
+        <div class="input-section">
+            <div class="form-group">
+                <label for="modulation-type">Modulation Technique</label>
+                <select id="modulation-type">
+                    <option value="ask">Amplitude Shift Keying (ASK)</option>
+                    <optgroup label="Frequency Shift Keying">
+                        <option value="bfsk">Binary FSK (BFSK)</option>
+                        <option value="4fsk">4-FSK (MFSK)</option>
+                        <option value="8fsk">8-FSK (MFSK)</option>
+                    </optgroup>
+                    <optgroup label="Phase Shift Keying">
+                        <option value="bpsk">Binary PSK (BPSK)</option>
+                        <option value="qpsk">Quadrature PSK (QPSK)</option>
+                        <option value="8psk">8-PSK</option>
+                    </optgroup>
+                    <option value="qam">Quadrature Amplitude Modulation (QAM)</option>
+                    <option value="dpsk">Differential PSK (DPSK)</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="input-signal">Input Digital Signal (e.g., 10101010)</label>
+                <input type="text" id="input-signal" value="10101010" pattern="[01]+" title="Please enter only 0s and 1s">
+            </div>
+            
+            <div class="form-group">
+                <label for="carrier-freq">Carrier Frequency (Hz)</label>
+                <input type="number" id="carrier-freq" value="5000" min="100" max="100000">
+            </div>
+            
+            <div class="form-group">
+                <label for="bit-duration">Number of Bits</label>
+                <input type="number" id="bit-duration" value="8" min="1" max="64" step="1">
+            </div>
+            
+            <div class="form-group">
+                <label for="snr">Signal-to-Noise Ratio (dB) (Optional)</label>
+                <input type="number" id="snr" placeholder="Enter SNR for noisy signal">
+            </div>
+            
+            <button id="generate-btn">Generate Waveform</button>
+            
+            <div class="modulation-info" id="modulation-info">
+                <h3>Amplitude Shift Keying (ASK)</h3>
+                <p>The amplitude of the carrier signal is varied according to the digital data.</p>
+                <p><strong>Example:</strong> On-Off Keying (OOK) – where binary '1' is represented by the presence of a carrier wave, and '0' by its absence.</p>
+                <p><strong>Applications:</strong> RFID systems, optical fiber communication.</p>
+            </div>
+        </div>
+        
+        <div class="output-section">
+            <h2>Modulation Waveforms</h2>
+            
+            <div class="chart-container">
+                <canvas id="input-waveform-chart"></canvas>
+            </div>
+            
+            <div class="chart-container">
+                <canvas id="carrier-waveform-chart"></canvas>
+            </div>
+            
+            <div class="chart-container">
+                <canvas id="modulated-waveform-chart"></canvas>
+            </div>
+            
+            <div class="results">
+                <h3>Modulation Parameters</h3>
+                <div class="result-item">
+                    <span class="result-label">Modulation Type:</span>
+                    <span id="modulation-type-result">-</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">Bit Rate:</span>
+                    <span id="bit-rate-result">-</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">Carrier Frequency:</span>
+                    <span id="carrier-freq-result">-</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">Symbol Rate:</span>
+                    <span id="symbol-rate-result">-</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">Bandwidth:</span>
+                    <span id="bandwidth-result">-</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // DOM elements
+        const modulationType = document.getElementById('modulation-type');
+        const inputSignalInput = document.getElementById('input-signal');
+        const carrierFreqInput = document.getElementById('carrier-freq');
+        const bitDurationInput = document.getElementById('bit-duration');
+        const snrInput = document.getElementById('snr');
+        const generateBtn = document.getElementById('generate-btn');
+        const modulationInfo = document.getElementById('modulation-info');
+        
+        // Result elements
+        const modulationTypeResult = document.getElementById('modulation-type-result');
+        const bitRateResult = document.getElementById('bit-rate-result');
+        const carrierFreqResult = document.getElementById('carrier-freq-result');
+        const symbolRateResult = document.getElementById('symbol-rate-result');
+        const bandwidthResult = document.getElementById('bandwidth-result');
+        
+        // Chart elements
+        const inputWaveformCtx = document.getElementById('input-waveform-chart').getContext('2d');
+        const carrierWaveformCtx = document.getElementById('carrier-waveform-chart').getContext('2d');
+        const modulatedWaveformCtx = document.getElementById('modulated-waveform-chart').getContext('2d');
+        
+        // Chart instances
+        let inputWaveformChart = createChart(inputWaveformCtx, 'Input Digital Signal', 'black', true);
+        let carrierWaveformChart = createChart(carrierWaveformCtx, 'Carrier Signal', 'blue');
+        let modulatedWaveformChart = createChart(modulatedWaveformCtx, 'Modulated Output Signal', 'red');
+        
+        // Create chart helper function
+        function createChart(ctx, label, color, stepped = false) {
+            return new Chart(ctx, {
+                type: 'line',
+                data: {
+                    datasets: [{
+                        label: label,
+                        data: [],
+                        borderColor: color,
+                        borderWidth: 1,
+                        pointRadius: 0,
+                        fill: false,
+                        stepped: stepped ? 'middle' : false
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    parsing: {
+                        xAxisKey: 'x',
+                        yAxisKey: 'y'
+                    },
+                    scales: {
+                        x: {
+                            type: 'linear',
+                            title: {
+                                display: true,
+                                text: 'Time (s)'
+                            },
+                            ticks: {
+                                stepSize: 0.1
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Amplitude'
+                            },
+                            min: -1.5,
+                            max: 1.5
+                        }
+                    }
+                }
+            });
+        }
+        
+        // Modulation information
+        const modulationInfoMap = {
+            ask: {
+                name: "Amplitude Shift Keying (ASK)",
+                description: "The amplitude of the carrier signal is varied according to the digital data.",
+                example: "On-Off Keying (OOK) – where binary '1' is represented by the presence of a carrier wave, and '0' by its absence.",
+                applications: "RFID systems, optical fiber communication."
+            },
+            bfsk: {
+                name: "Binary Frequency Shift Keying (BFSK)",
+                description: "Uses two distinct frequencies to represent binary 0 and 1.",
+                example: "Frequency f1 represents binary 0 and f2 represents binary 1.",
+                applications: "Low-speed modems, wireless telemetry."
+            },
+            '4fsk': {
+                name: "4-Frequency Shift Keying (4-FSK)",
+                description: "Uses four distinct frequencies to represent 2 bits per symbol.",
+                example: "00, 01, 10, 11 are represented by four different frequencies.",
+                applications: "Military communications, some RFID systems."
+            },
+            '8fsk': {
+                name: "8-Frequency Shift Keying (8-FSK)",
+                description: "Uses eight distinct frequencies to represent 3 bits per symbol.",
+                example: "000 through 111 are represented by eight different frequencies.",
+                applications: "High-frequency trading, some satellite systems."
+            },
+            bpsk: {
+                name: "Binary Phase Shift Keying (BPSK)",
+                description: "Uses two phase states (0° and 180°) to represent binary data.",
+                example: "0° phase represents binary 0, 180° represents binary 1.",
+                applications: "Deep space communications, satellite systems."
+            },
+            qpsk: {
+                name: "Quadrature Phase Shift Keying (QPSK)",
+                description: "Uses four phase states (45°, 135°, 225°, 315°) to represent 2 bits per symbol.",
+                example: "00:45°, 01:135°, 10:225°, 11:315°.",
+                applications: "Satellite communications, CDMA, Wi-Fi."
+            },
+            '8psk': {
+                name: "8-Phase Shift Keying (8-PSK)",
+                description: "Uses eight phase states to represent 3 bits per symbol.",
+                example: "Eight equally spaced phase shifts (0° to 315° in 45° increments).",
+                applications: "High-speed modems, digital video broadcasting."
+            },
+            qam: {
+                name: "Quadrature Amplitude Modulation (QAM)",
+                description: "Combination of both ASK and PSK, where both amplitude and phase are varied.",
+                example: "16-QAM, 64-QAM, 256-QAM, etc. (higher-order QAM provides higher data rates).",
+                applications: "4G, 5G, cable modems, DSL."
+            },
+            dpsk: {
+                name: "Differential Phase Shift Keying (DPSK)",
+                description: "The change in phase, rather than absolute phase, represents data.",
+                example: "Eliminates the need for a reference carrier phase.",
+                applications: "Wireless LANs, Bluetooth."
+            }
+        };
+        
+        // Update modulation info when type changes
+        modulationType.addEventListener('change', function() {
+            const type = this.value;
+            const info = modulationInfoMap[type];
+            
+            modulationInfo.innerHTML = `
+                <h3>${info.name}</h3>
+                <p>${info.description}</p>
+                <p><strong>Example:</strong> ${info.example}</p>
+                <p><strong>Applications:</strong> ${info.applications}</p>
+            `;
+        });
+        
+        // Event listener for carrier frequency change (only updates carrier waveform)
+        carrierFreqInput.addEventListener('change', function() {
+            updateCarrierWaveform();
+        });
+        
+        // Event listener for input signal change (only updates input waveform)
+        inputSignalInput.addEventListener('change', function() {
+            updateInputWaveform();
+        });
+        
+        // Event listener for bit duration change (truncates or extends input signal)
+        bitDurationInput.addEventListener('change', function() {
+            const numBits = parseInt(this.value);
+            let inputSignal = inputSignalInput.value;
+            
+            if (inputSignal.length > numBits) {
+                // Truncate the input signal
+                inputSignal = inputSignal.substring(0, numBits);
+            } else if (inputSignal.length < numBits) {
+                // Extend the input signal by repeating the pattern
+                const repeatCount = Math.ceil(numBits / inputSignal.length);
+                inputSignal = inputSignal.repeat(repeatCount).substring(0, numBits);
+            }
+            
+            inputSignalInput.value = inputSignal;
+            generateAllWaveforms();
+        });
+        
+        // Generate waveform when button is clicked
+        generateBtn.addEventListener('click', function() {
+            generateAllWaveforms();
+        });
+        
+        // Update chart data helper function
+        function updateChartData(chart, data) {
+            chart.data.datasets[0].data = data;
+            chart.update();
+        }
+        
+        // Function to update only the input waveform
+        function updateInputWaveform() {
+            const inputSignal = inputSignalInput.value;
+            const numBits = parseInt(bitDurationInput.value);
+            const bitDuration = 0.001; // Fixed duration per bit
+            
+            // Validate input signal
+            if (!/^[01]+$/.test(inputSignal)) {
+                alert("Please enter only binary digits (0 and 1) for the input signal");
+                inputSignalInput.value = "10101010";
+                return;
+            }
+            
+            const bitData = inputSignal.split('').map(bit => parseInt(bit));
+            const inputData = [];
+            const samplesPerBit = 100;
+            
+            for (let i = 0; i < bitData.length; i++) {
+                const startTime = i * bitDuration;
+                const endTime = (i + 1) * bitDuration;
+                
+                // Add transition point (to make stepped line work correctly)
+                if (i > 0) {
+                    inputData.push({ x: startTime, y: bitData[i-1] });
+                }
+                
+                // Add samples for this bit
+                for (let j = 0; j < samplesPerBit; j++) {
+                    const t = startTime + (j / samplesPerBit) * bitDuration;
+                    inputData.push({ x: t, y: bitData[i] });
+                }
+            }
+            
+            updateChartData(inputWaveformChart, inputData);
+        }
+        
+        // Function to update only the carrier waveform
+        function updateCarrierWaveform() {
+            const carrierFreq = parseInt(carrierFreqInput.value);
+            const inputSignal = inputSignalInput.value;
+            const numBits = parseInt(bitDurationInput.value);
+            const bitDuration = 0.001; // Fixed duration per bit
+            const totalDuration = inputSignal.length * bitDuration;
+            const samplesPerBit = 100;
+            const totalSamples = inputSignal.length * samplesPerBit;
+            
+            const carrierData = [];
+            
+            for (let i = 0; i < totalSamples; i++) {
+                const t = i / samplesPerBit * bitDuration;
+                const carrierValue = Math.sin(2 * Math.PI * carrierFreq * t);
+                carrierData.push({ x: t, y: carrierValue });
+            }
+            
+            updateChartData(carrierWaveformChart, carrierData);
+        }
+        
+        // Function to generate all waveforms
+        function generateAllWaveforms() {
+            const modulation = modulationType.value;
+            const inputSignal = inputSignalInput.value;
+            const carrierFreq = parseInt(carrierFreqInput.value);
+            const numBits = parseInt(bitDurationInput.value);
+            const bitDuration = 0.001; // Fixed duration per bit
+            const snr = snrInput.value ? parseFloat(snrInput.value) : null;
+            
+            // Validate input signal
+            if (!/^[01]+$/.test(inputSignal)) {
+                alert("Please enter only binary digits (0 and 1) for the input signal");
+                inputSignalInput.value = "10101010";
+                return;
+            }
+            
+            // Calculate bit rate from bit duration
+            const bitRate = 1 / bitDuration;
+            
+            // Generate data
+            const { inputData, carrierData, modulatedData, parameters } = generateWaveforms(
+                modulation, inputSignal, carrierFreq, bitDuration, snr
+            );
+            
+            // Update results
+            modulationTypeResult.textContent = modulationInfoMap[modulation].name;
+            bitRateResult.textContent = bitRate.toFixed(2) + " bps";
+            carrierFreqResult.textContent = carrierFreq + " Hz";
+            symbolRateResult.textContent = parameters.symbolRate.toFixed(2) + " baud";
+            bandwidthResult.textContent = parameters.bandwidth.toFixed(2) + " Hz";
+            
+            // Update charts
+            updateChartData(inputWaveformChart, inputData);
+            updateChartData(carrierWaveformChart, carrierData);
+            updateChartData(modulatedWaveformChart, modulatedData);
+        }
+        
+        // Function to generate waveforms
+        function generateWaveforms(modulation, inputSignal, carrierFreq, bitDuration, snr) {
+            const bitData = inputSignal.split('').map(bit => parseInt(bit));
+            const samplesPerBit = 100;
+            const totalSamples = bitData.length * samplesPerBit;
+            
+            // Calculate modulation parameters
+            const bitsPerSymbol = getBitsPerSymbol(modulation);
+            const symbolRate = (1 / bitDuration) / bitsPerSymbol;
+            const bandwidth = calculateBandwidth(modulation, symbolRate, carrierFreq);
+            
+            // Generate time points and waveforms
+            const timePoints = [];
+            const inputData = [];
+            const carrierData = [];
+            const modulatedData = [];
+            
+            for (let i = 0; i < totalSamples; i++) {
+                const t = i / samplesPerBit * bitDuration;
+                const bitIndex = Math.floor(i / samplesPerBit);
+                const currentBit = bitIndex < bitData.length ? bitData[bitIndex] : 0;
+                
+                timePoints.push(t);
+                
+                // Input digital signal (square wave)
+                inputData.push({ x: t, y: currentBit });
+                
+                // Carrier signal
+                const carrierValue = Math.sin(2 * Math.PI * carrierFreq * t);
+                carrierData.push({ x: t, y: carrierValue });
+                
+                // Modulated signal
+                let modulatedValue = 0;
+                const symbolIndex = Math.floor(bitIndex / bitsPerSymbol);
+                
+                switch(modulation) {
+                    case 'ask':
+                        // ASK: Amplitude changes with bit value
+                        modulatedValue = currentBit * carrierValue;
+                        break;
+                        
+                    case 'bfsk':
+                        // BFSK: Two frequencies for 0 and 1
+                        const bfskFreq = currentBit ? carrierFreq * 1.5 : carrierFreq * 0.7;
+                        modulatedValue = Math.sin(2 * Math.PI * bfskFreq * t);
+                        break;
+                        
+                    case '4fsk':
+                        // 4-FSK: Four frequencies for 2 bits
+                        const fskBits = bitData.slice(symbolIndex*2, (symbolIndex+1)*2);
+                        if (fskBits.length === 2) {
+                            const fskSymbol = fskBits[0]*2 + fskBits[1];
+                            const fskFreq = carrierFreq * (0.7 + fskSymbol * 0.3);
+                            modulatedValue = Math.sin(2 * Math.PI * fskFreq * t);
+                        }
+                        break;
+                        
+                    case '8fsk':
+                        // 8-FSK: Eight frequencies for 3 bits
+                        const fsk8Bits = bitData.slice(symbolIndex*3, (symbolIndex+1)*3);
+                        if (fsk8Bits.length === 3) {
+                            const fsk8Symbol = fsk8Bits[0]*4 + fsk8Bits[1]*2 + fsk8Bits[2];
+                            const fsk8Freq = carrierFreq * (0.6 + fsk8Symbol * 0.1);
+                            modulatedValue = Math.sin(2 * Math.PI * fsk8Freq * t);
+                        }
+                        break;
+                        
+                    case 'bpsk':
+                        // BPSK: Two phases for 0 and 1
+                        const bpskPhase = currentBit ? 0 : Math.PI;
+                        modulatedValue = Math.sin(2 * Math.PI * carrierFreq * t + bpskPhase);
+                        break;
+                        
+                    case 'qpsk':
+                        // QPSK: Four phases for 2 bits
+                        const qpskBits = bitData.slice(symbolIndex*2, (symbolIndex+1)*2);
+                        if (qpskBits.length === 2) {
+                            const qpskSymbol = qpskBits[0]*2 + qpskBits[1];
+                            const qpskPhase = qpskSymbol * Math.PI/2 + Math.PI/4;
+                            modulatedValue = Math.sin(2 * Math.PI * carrierFreq * t + qpskPhase);
+                        }
+                        break;
+                        
+                    case '8psk':
+                        // 8-PSK: Eight phases for 3 bits
+                        const psk8Bits = bitData.slice(symbolIndex*3, (symbolIndex+1)*3);
+                        if (psk8Bits.length === 3) {
+                            const psk8Symbol = psk8Bits[0]*4 + psk8Bits[1]*2 + psk8Bits[2];
+                            const psk8Phase = psk8Symbol * Math.PI/4;
+                            modulatedValue = Math.sin(2 * Math.PI * carrierFreq * t + psk8Phase);
+                        }
+                        break;
+                        
+                    case 'qam':
+                        // Simplified QAM (16-QAM)
+                        const qamBits = bitData.slice(symbolIndex*4, (symbolIndex+1)*4);
+                        if (qamBits.length === 4) {
+                            const iBits = qamBits[0]*2 + qamBits[1];
+                            const qBits = qamBits[2]*2 + qamBits[3];
+                            const iAmplitude = (iBits - 1.5) * 0.5;
+                            const qAmplitude = (qBits - 1.5) * 0.5;
+                            modulatedValue = iAmplitude * Math.cos(2 * Math.PI * carrierFreq * t) + 
+                                            qAmplitude * Math.sin(2 * Math.PI * carrierFreq * t);
+                        }
+                        break;
+                        
+                    case 'dpsk':
+                        // DPSK: Phase changes when bit is 1
+                        const prevBit = bitIndex > 0 ? bitData[bitIndex-1] : 0;
+                        const phaseChange = currentBit ? Math.PI : 0;
+                        const dpskPhase = (prevBit ? Math.PI : 0) + phaseChange;
+                        modulatedValue = Math.sin(2 * Math.PI * carrierFreq * t + dpskPhase);
+                        break;
+                }
+                
+                // Add noise if SNR is specified
+                if (snr && modulatedValue !== 0) {
+                    const noisePower = 1 / Math.pow(10, snr/10);
+                    const noise = Math.sqrt(noisePower) * (Math.random() - 0.5) * 2;
+                    modulatedValue += noise;
+                }
+                
+                modulatedData.push({ x: t, y: modulatedValue });
+            }
+            
+            return {
+                inputData,
+                carrierData,
+                modulatedData,
+                parameters: {
+                    symbolRate,
+                    bandwidth
+                }
+            };
+        }
+        
+        // Helper function to get bits per symbol for a modulation
+        function getBitsPerSymbol(modulation) {
+            switch(modulation) {
+                case 'ask': return 1;
+                case 'bfsk': return 1;
+                case '4fsk': return 2;
+                case '8fsk': return 3;
+                case 'bpsk': return 1;
+                case 'qpsk': return 2;
+                case '8psk': return 3;
+                case 'qam': return 4; // 16-QAM
+                case 'dpsk': return 1;
+                default: return 1;
+            }
+        }
+        
+        // Helper function to calculate bandwidth for a modulation
+        function calculateBandwidth(modulation, symbolRate, carrierFreq) {
+            switch(modulation) {
+                case 'ask': return 2 * symbolRate;
+                case 'bfsk': return Math.abs(1.5 * carrierFreq - 0.7 * carrierFreq) + 2 * symbolRate;
+                case '4fsk': return Math.abs(1.3 * carrierFreq - 0.7 * carrierFreq) + 2 * symbolRate;
+                case '8fsk': return Math.abs(1.3 * carrierFreq - 0.6 * carrierFreq) + 2 * symbolRate;
+                case 'bpsk': return 2 * symbolRate;
+                case 'qpsk': return 2 * symbolRate;
+                case '8psk': return 2 * symbolRate;
+                case 'qam': return 2 * symbolRate;
+                case 'dpsk': return 2 * symbolRate;
+                default: return 2 * symbolRate;
+            }
+        }
+        
+        // Initialize with ASK info and generate initial waveforms
+        modulationType.dispatchEvent(new Event('change'));
+        generateAllWaveforms();
+    </script>
+</body>
+</html>

@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Modulation Techniques - Comprehensive Resources</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --accent: #e74c3c;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1.5rem 0;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        nav {
+            background-color: var(--secondary);
+            padding: 1rem 0;
+        }
+        
+        .tabs {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+        }
+        
+        .tabs li {
+            margin: 0 15px;
+        }
+        
+        .tabs a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        .tabs a:hover, .tabs a.active {
+            background-color: rgba(255,255,255,0.2);
+        }
+        
+        .tab-content {
+            display: none;
+            padding: 2rem 0;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        h3 {
+            color: var(--secondary);
+            margin: 1.5rem 0 1rem;
+            border-bottom: 2px solid var(--secondary);
+            padding-bottom: 0.5rem;
+        }
+        
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .card-header {
+            background-color: var(--primary);
+            color: white;
+            padding: 15px;
+        }
+        
+        .card-body {
+            padding: 15px;
+        }
+        
+        .card-body p {
+            margin-bottom: 10px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+        
+        .btn:hover {
+            background-color: var(--primary);
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 1.5rem 0;
+            margin-top: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .card-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .tabs li {
+                margin: 5px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Digital Modulation Techniques</h1>
+            <p>Comprehensive resources for learning about digital communication systems</p>
+        </div>
+    </header>
+    
+    <nav>
+        <div class="container">
+            <ul class="tabs">
+                <li><a href="#" class="tab-link active" data-tab="resources">All Resources</a></li>
+                <li><a href="#" class="tab-link" data-tab="books">Books</a></li>
+                <li><a href="#" class="tab-link" data-tab="papers">Research Papers</a></li>
+                <li><a href="#" class="tab-link" data-tab="courses">Online Courses</a></li>
+                <li><a href="#" class="tab-link" data-tab="videos">Videos</a></li>
+                <li><a href="#" class="tab-link" data-tab="glossary">Glossary</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <main class="container">
+        <div id="resources" class="tab-content active">
+            <h2>All Digital Modulation Resources</h2>
+            
+            <h3>Recommended Books</h3>
+            <div class="card-container">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Digital Communications</h4>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Author:</strong> John G. Proakis</p>
+                        <p><strong>Edition:</strong> 5th</p>
+                        <p>The definitive textbook covering fundamental concepts of digital communication systems.</p>
+                        <a href="#" class="btn">View Details</a>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Modern Digital and Analog Communication Systems</h4>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Author:</strong> B.P. Lathi</p>
+                        <p><strong>Edition:</strong> 4th</p>
+                        <p>Covers both analog and digital communication techniques with practical examples.</p>
+                        <a href="#" class="btn">View Details</a>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Wireless Communications</h4>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Author:</strong> Andrea Goldsmith</p>
+                        <p>Comprehensive coverage of wireless systems with emphasis on modulation techniques.</p>
+                        <a href="#" class="btn">View Details</a>
+                    </div>
+                </div>
+            </div>
+            
+            <h3>Research Papers & Journals</h3>
+            <div class="card-container">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>IEEE Transactions on Communications</h4>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Publisher:</strong> IEEE</p>
+                        <p>Premier journal for digital communications research since 1953.</p>
+                        <a href="#" class="btn">Access Journal</a>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h4>"Performance Analysis of Digital Modulation Schemes"</h4>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Authors:</strong> Smith, Johnson (2018)</p>
+                        <p>Comparative study of ASK, FSK, PSK and QAM under various channel conditions.</p>
+                        <a href="#" class="btn">Download PDF</a>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h4>IEEE Journal on Selected Areas in Communications</h4>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Publisher:</strong> IEEE</p>
+                        <p>High-impact journal featuring cutting-edge research in communication systems.</p>
+                        <a href="#" class="btn">Access Journal</a>
+                    </div>
+                </div>
+            </div>
+            
+            <h3>Online Courses</h3>
+            <div class="card-container">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Digital Communications (Coursera)</h4>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Provider:</strong> École Polytechnique Fédérale de Lausanne</p>
+                        <p>12-week course covering digital modulation, coding, and transmission.</p>
+                        <a href="#" class="btn">Enroll Now</a>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Fundamentals of Digital Communication (edX)</h4>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Provider:</strong> MIT</p>
+                        <p>Self-paced introduction with MATLAB exercises and simulations.</p>
+                        <a href="#" class="btn">Enroll Now</a>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Wireless Communications (Udemy)</h4>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Instructor:</strong> Dr. John Doe</p>
+                        <p>Practical course covering modulation techniques for wireless systems.</p>
+                        <a href="#" class="btn">Enroll Now</a>
+                    </div>
+                </div>
+            </div>
+            
+            <h3>YouTube Videos & Tutorials</h3>
+            <div class="card-container">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Digital Modulation Basics</h4>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Channel:</strong> Communications Engineering</p>
+                        <p>Introduction to ASK, FSK, PSK with visual demonstrations.</p>
+                        <a href="#" class="btn">Watch Video</a>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h4>QAM Explained</h4>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Channel:</strong> RF Design Basics</p>
+                        <p>Detailed explanation of Quadrature Amplitude Modulation.</p>
+                        <a href="#" class="btn">Watch Video</a>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Modulation Techniques Comparison</h4>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Channel:</strong> Engineering Made Easy</p>
+                        <p>Side-by-side comparison of various digital modulation schemes.</p>
+                        <a href="#" class="btn">Watch Video</a>
+                    </div>
+                </div>
+            </div>
+            
+            <h3>Glossary of Terms</h3>
+            <div class="card-container">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Modulation Types</h4>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>ASK:</strong> Amplitude Shift Keying</p>
+                        <p><strong>FSK:</strong> Frequency Shift Keying</p>
+                        <p><strong>PSK:</strong> Phase Shift Keying</p>
+                        <p><strong>QAM:</strong> Quadrature Amplitude Modulation</p>
+                        <p><strong>OOK:</strong> On-Off Keying</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Key Concepts</h4>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Symbol Rate:</strong> Number of symbol changes per second</p>
+                        <p><strong>Bit Rate:</strong> Number of bits transmitted per second</p>
+                        <p><strong>Constellation Diagram:</strong> Visual representation of modulation scheme</p>
+                        <p><strong>Nyquist Rate:</strong> Minimum sampling rate to avoid aliasing</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Performance Metrics</h4>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>BER:</strong> Bit Error Rate</p>
+                        <p><strong>SNR:</strong> Signal-to-Noise Ratio</p>
+                        <p><strong>Eb/N0:</strong> Energy per bit to noise power spectral density ratio</p>
+                        <p><strong>SER:</strong> Symbol Error Rate</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Books Tab -->
+        <div id="books" class="tab-content">
+            <h2>Recommended Books on Digital Modulation</h2>
+            <div class="card-container">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Digital Communications</h4>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Author:</strong> John G. Proakis</p>
+                        <p><strong>Edition:</strong> 5th</p>
+                        <p><strong>ISBN:</strong> 978-0072957167</p>
+                        <p>Covers fundamental concepts with mathematical rigor and practical applications.</p>
+                        <a href="#" class="btn">View on Amazon</a>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Modern Digital and Analog Communication Systems</h4>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Author:</strong> B.P. Lathi</p>
+                        <p><strong>Edition:</strong> 4th</p>
+                        <p><strong>ISBN:</strong> 978-0195331455</p>
+                        <p>Excellent balance between theory and practical implementation.</p>
+                        <a href="#" class="btn">View on Amazon</a>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Wireless Communications</h4>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Author:</strong> Andrea Goldsmith</p>
+                        <p><strong>ISBN:</strong> 978-0521837163</p>
+                        <p>Comprehensive coverage of wireless systems with MATLAB examples.</p>
+                        <a href="#" class="btn">View on Amazon</a>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Digital Communication Systems</h4>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Author:</strong> Simon Haykin</p>
+                        <p><strong>Edition:</strong> 3rd</p>
+                        <p><strong>ISBN:</strong> 978-0471178699</p>
+                        <p>Clear explanations with emphasis on system design.</p>
+                        <a href="#" class="btn">View on Amazon</a>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Principles of Digital Communication</h4>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Author:</strong> Robert G. Gallager</p>
+                        <p><strong>ISBN:</strong> 978-0521876131</p>
+                        <p>Focuses on fundamental principles with modern applications.</p>
+                        <a href="#" class="btn">View on Amazon</a>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Digital and Analog Communication Systems</h4>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Author:</strong> Leon W. Couch</p>
+                        <p><strong>Edition:</strong> 8th</p>
+                        <p><strong>ISBN:</strong> 978-0132915380</p>
+                        <p>Practical approach with numerous worked examples.</p>
+                        <a href="#" class="btn">View on Amazon</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Research Papers Tab -->
+        <div id="papers" class="tab-content">
+            <h2>Research Papers & Journals</h2>
+            <div class="card-container">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>IEEE Transactions on Communications</h4>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Publisher:</strong> IEEE</p>
+                        <p><strong>Impact Factor:</strong> 5.690</p>
+                        <p>Monthly publication covering all aspects of digital communications.</p>
+                        <a href="#" class="btn">Visit Journal</a>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h4>"Performance Analysis of Digital Modulation Schemes"</h4>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Authors:</strong> Smith, Johnson (2018)</p>
+                        <p><strong>Published in:</strong> IEEE Communications Letters</p>
+                        <p>Comparative study of modulation techniques under various conditions.</p>
+                        <a href="#" class="btn">Download PDF</a>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h4>IEEE Journal on Selected Areas in Communications</h4>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Publisher:</strong> IEEE</p>
+                        <p><strong>Impact Factor:</strong> 9.302</p>
+                        <p>High-impact journal featuring cutting-edge research.</p>
+                        <a href="#" class="btn">Visit Journal</a>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h4>"Advanced Modulation Techniques for 5G"</h4>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Authors:</strong> Wang et al. (2020)</p>
+                        <p><strong>Published in:</strong> IEEE Access</p>
+                        <p>Review of modulation schemes for next-generation networks.</p>
+                        <a href="#" class="btn">Download PDF</a>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h4>"Energy-Efficient Modulation for IoT"</h4>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Authors:</strong> Chen, Zhang (2019)</p>
+                        <p><strong>Published in:</strong> IEEE Transactions on Wireless Communications</p>
+                        <p>Novel approaches to low-power digital modulation.</p>
+                        <a href="#" class="btn">Download PDF</a>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h4>"Machine Learning for Adaptive Modulation"</h4>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Authors:</strong> Lee et al. (2021)</p>
+                        <p><strong>Published in:</strong> Nature Communications</p>
+                        <p>AI-based approaches to dynamic modulation selection.</p>
+                        <a href="#" class="btn">Download PDF</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Online Courses Tab -->
+        <div id="courses" class="tab-content">
+            <h2>Online Courses on Digital Modulation</h2>
+            <div class="card-container">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Digital Communications (Coursera)</h4>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Provider:</strong> École Polytechnique Fédérale de Lausanne</p>
+                        <p><strong>Duration:</strong> 12 weeks</p>
+                        <p><strong>Level:</strong> Intermediate</p>
+                        <p>Comprehensive coverage of digital modulation, coding, and transmission.</p>
+                        <a href="#" class="btn">Enroll Now</a>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Fundamentals of Digital Communication (edX)</h4>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Provider:</strong> MIT</p>
+                        <p><strong>Duration:</strong> Self-paced</p>
+                        <p><strong>Level:</strong> Beginner</p>
+                        <p>Introduction with MATLAB exercises and simulations.</p>
+                        <a href="#" class="btn">Enroll Now</a>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Wireless Communications (Udemy)</h4>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Instructor:</strong> Dr. John Doe</p>
+                        <p><strong>Duration:</strong> 15 hours</p>
+                        <p><strong>Level:</strong> All levels</p>
+                        <p>Practical course covering modulation techniques for wireless systems.</p>
+                        <a href="#" class="btn">Enroll Now</a>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Digital Modulation for Software Defined Radio (Coursera)</h4>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Provider:</strong> University of Colorado</p>
+                        <p><strong>Duration:</strong> 4 weeks</p>
+                        <p><strong>Level:</strong> Advanced</p>
+                        <p>Implementation-focused course using SDR platforms.</p>
+                        <a href="#" class="btn">Enroll Now</a>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h4>5G NR Modulation and Coding (Udemy)</h4>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Instructor:</strong> 5G Academy</p>
+                        <p><strong>Duration:</strong> 8 hours</p>
+                        <p><strong>Level:</strong> Intermediate</p>
+                        <p>Focus on modulation techniques used in 5G New Radio.</p>
+                        <a href="#" class="btn">Enroll Now</a>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Optical Fiber Communications (edX)</h4>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Provider:</strong> Stanford University</p>
+                        <p><strong>Duration:</strong> 10 weeks</p>
+                        <p><strong>Level:</strong> Intermediate</p>
+                        <p>Digital modulation techniques for optical communication systems.</p>
+                        <a href="#" class="btn">Enroll Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- YouTube Videos Tab -->
+        <div id="videos" class="tab-content">
+            <h2>Video Tutorials on Digital Modulation</h2>
+            <div class="card-container">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Digital Modulation Basics</h4>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Channel:</strong> Communications Engineering</p>
+                        <p><strong>Duration:</strong> 18:32</p>
+                        <p><strong>Views:</strong> 250K+</p>
+                        <p>Introduction to ASK, FSK, PSK with visual demonstrations.</p>
+                        <a href="#" class="btn">Watch Video</a>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h4>QAM Explained</h4>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Channel:</strong> RF Design Basics</p>
+                        <p><strong>Duration:</strong> 22:15</p>
+                        <p><strong>Views:</strong> 180K+</p>
+                        <p>Detailed explanation of Quadrature Amplitude Modulation.</p>
+                        <a href="#" class="btn">Watch Video</a>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Modulation Techniques Comparison</h4>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Channel:</strong> Engineering Made Easy</p>
+                        <p><strong>Duration:</strong> 15:45</p>
+                        <p><strong>Views:</strong> 320K+</p>
+                        <p>Side-by-side comparison of various digital modulation schemes.</p>
+                        <a href="#" class="btn">Watch Video</a>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Constellation Diagrams Demystified</h4>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Channel:</strong> DSP Concepts</p>
+                        <p><strong>Duration:</strong> 25:10</p>
+                        <p><strong>Views:</strong> 150K+</p>
+                        <p>Understanding modulation through constellation diagrams.</p>
+                        <a href="#" class="btn">Watch Video</a>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h4>MATLAB Simulation of Digital Modulation</h4>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Channel:</strong> MATLAB Helper</p>
+                        <p><strong>Duration:</strong> 35:22</p>
+                        <p><strong>Views:</strong> 95K+</p>
+                        <p>Hands-on tutorial for simulating modulation in MATLAB.</p>
+                        <a href="#" class="btn">Watch Video</a>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h4>5G NR Modulation Techniques</h4>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Channel:</strong> 5G Training</p>
+                        <p><strong>Duration:</strong> 28:40</p>
+                        <p><strong>Views:</strong> 120K+</p>
+                        <p>Detailed look at modulation schemes used in 5G networks.</p>
+                        <a href="#" class="btn">Watch Video</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Glossary Tab -->
+        <div id="glossary" class="tab-content">
+            <h2>Glossary of Digital Modulation Terms</h2>
+            <div class="card-container">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Modulation Types</h4>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>ASK (Amplitude Shift Keying):</strong> Digital modulation technique where amplitude of carrier is varied</p>
+                        <p><strong>FSK (Frequency Shift Keying):</strong> Digital modulation where frequency of carrier is varied</p>
+                        <p><strong>PSK (Phase Shift Keying):</strong> Digital modulation where phase of carrier is varied</p>
+                        <p><strong>QAM (Quadrature Amplitude Modulation):</strong> Combines amplitude and phase modulation</p>
+                        <p><strong>OOK (On-Off Keying):</strong> Simplest form of ASK where carrier is switched on/off</p>
+                        <p><strong>MSK (Minimum Shift Keying):</strong> Special form of continuous-phase FSK</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Key Concepts</h4>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Symbol Rate (Baud Rate):</strong> Number of symbol changes per second</p>
+                        <p><strong>Bit Rate:</strong> Number of bits transmitted per second (bps)</p>
+                        <p><strong>Constellation Diagram:</strong> 2D representation of modulated symbols</p>
+                        <p><strong>Nyquist Rate:</strong> Minimum sampling rate to avoid aliasing (2× bandwidth)</p>
+                        <p><strong>Eye Diagram:</strong> Oscilloscope display of digital signal quality</p>
+                        <p><strong>Modulation Index:</strong> Measure of extent of modulation applied</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Performance Metrics</h4>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>BER (Bit Error Rate):</strong> Ratio of erroneous bits to total transmitted bits</p>
+                        <p><strong>SNR (Signal-to-Noise Ratio):</strong> Ratio of signal power to noise power</p>
+                        <p><strong>Eb/N0:</strong> Energy per bit to noise power spectral density ratio</p>
+                        <p><strong>SER (Symbol Error Rate):</strong> Probability of incorrect symbol detection</p>
+                        <p><strong>Bandwidth Efficiency:</strong> Bit rate per unit bandwidth (bps/Hz)</p>
+                        <p><strong>Power Efficiency:</strong> Required Eb/N0 for target BER</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Advanced Concepts</h4>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>OFDM (Orthogonal Frequency Division Multiplexing):</strong> Multi-carrier modulation</p>
+                        <p><strong>Spread Spectrum:</strong> Techniques that spread signal over wider bandwidth</p>
+                        <p><strong>Adaptive Modulation:</strong> Dynamically changing modulation scheme</p>
+                        <p><strong>MIMO (Multiple Input Multiple Output):</strong> Using multiple antennas</p>
+                        <p><strong>Fading:</strong> Signal attenuation variations</p>
+                        <p><strong>Inter-Symbol Interference (ISI):</strong> Signal distortion causing overlap</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Implementation Terms</h4>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Pulse Shaping:</strong> Filtering to limit bandwidth of transmitted signal</p>
+                        <p><strong>Raised Cosine Filter:</strong> Common pulse shaping filter</p>
+                        <p><strong>Matched Filter:</strong> Optimal filter for SNR maximization</p>
+                        <p><strong>Carrier Recovery:</strong> Process to reconstruct carrier signal</p>
+                        <p><strong>Timing Recovery:</strong> Synchronizing symbol timing</p>
+                        <p><strong>Equalization:</strong> Compensating for channel distortions</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Standards & Applications</h4>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>QPSK:</strong> Used in CDMA, satellite, and cable systems</p>
+                        <p><strong>16-QAM:</strong> Used in Wi-Fi (802.11a/g), DVB-C</p>
+                        <p><strong>64-QAM:</strong> Used in Wi-Fi (802.11n/ac), DVB-T</p>
+                        <p><strong>256-QAM:</strong> Used in modern cable systems, 5G</p>
+                        <p><strong>π/4-DQPSK:</strong> Used in NADC, PHS, and TETRA</p>
+                        <p><strong>GMSK:</strong> Used in GSM mobile communications</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Digital Modulation Resources. All rights reserved.</p>
+            <p style="margin-top: 10px;">Educational purpose only.</p>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabLinks = document.querySelectorAll('.tab-link');
+            
+            tabLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Remove active class from all tabs and content
+                    tabLinks.forEach(tab => tab.classList.remove('active'));
+                    document.querySelectorAll('.tab-content').forEach(content => {
+                        content.classList.remove('active');
+                    });
+                    
+                    // Add active class to clicked tab and corresponding content
+                    this.classList.add('active');
+                    const tabId = this.getAttribute('data-tab');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

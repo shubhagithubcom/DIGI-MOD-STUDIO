@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Communication: Pros & Cons</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #2c3e50;
+            font-size: 2.5rem;
+            position: relative;
+        }
+
+        h1::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(to right, #3498db, #9b59b6);
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+
+        h2 {
+            text-align: center;
+            margin: 40px 0 20px;
+            color: #2c3e50;
+            font-size: 1.8rem;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+            display: inline-block;
+        }
+
+        .section-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .section {
+            flex: 1;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .section-header {
+            background: linear-gradient(to right, #3498db, #9b59b6);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .cons .section-header {
+            background: linear-gradient(to right, #e74c3c, #f39c12);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background-color: #f1f8fe;
+            padding: 12px;
+            text-align: left;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #e1e5eb;
+            vertical-align: top;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .feature-img {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+            margin-right: 15px;
+            vertical-align: middle;
+        }
+
+        .feature-name {
+            font-weight: 600;
+            color: #2c3e50;
+            display: inline-block;
+            vertical-align: middle;
+            width: calc(100% - 70px);
+            text-transform: uppercase;
+        }
+
+        .feature-desc {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            margin-top: 5px;
+            padding-left: 65px;
+            line-height: 1.5;
+        }
+
+        .pros td {
+            border-left: 4px solid #2ecc71;
+        }
+
+        .cons td {
+            border-left: 4px solid #e74c3c;
+        }
+
+        @media (max-width: 768px) {
+            .section-container {
+                flex-direction: column;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            .feature-img {
+                width: 40px;
+                height: 40px;
+            }
+        }
+
+        /* Animation for rows */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        tr {
+            opacity: 0;
+            animation: fadeIn 0.5s forwards;
+        }
+
+        /* Add delay for each row */
+        tr:nth-child(1) { animation-delay: 0.1s; }
+        tr:nth-child(2) { animation-delay: 0.2s; }
+        tr:nth-child(3) { animation-delay: 0.3s; }
+        tr:nth-child(4) { animation-delay: 0.4s; }
+        tr:nth-child(5) { animation-delay: 0.5s; }
+        tr:nth-child(6) { animation-delay: 0.6s; }
+        tr:nth-child(7) { animation-delay: 0.7s; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Digital Communication Systems</h1>
+        
+        <div style="text-align: center;">
+            <h2>Advantages vs Disadvantages</h2>
+        </div>
+        
+        <div class="section-container">
+            <div class="section">
+                <div class="section-header">Advantages</div>
+                <table class="pros">
+                    <tr>
+                        <td>
+                            <img src="https://cdn-icons-png.flaticon.com/512/3161/3161837.png" alt="Noise Immunity" class="feature-img">
+                            <span class="feature-name">Higher Noise Immunity</span>
+                            <div class="feature-desc">Digital signals are more resistant to noise and interference compared to analog signals. They can be perfectly reconstructed as long as the disturbance isn't enough to prevent identification of the original signal.</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <img src="https://cdn-icons-png.flaticon.com/512/2936/2936886.png" alt="Bandwidth" class="feature-img">
+                            <span class="feature-name">Efficient Bandwidth Utilization</span>
+                            <div class="feature-desc">Digital communication allows for more efficient use of bandwidth through techniques like compression and multiplexing, enabling more data to be transmitted over the same channel.</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <img src="https://cdn-icons-png.flaticon.com/512/2957/2957131.png" alt="Security" class="feature-img">
+                            <span class="feature-name">Secure Communication</span>
+                            <div class="feature-desc">Digital signals can be encrypted using complex algorithms, making them much more secure than analog communications against eavesdropping and unauthorized access.</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <img src="https://cdn-icons-png.flaticon.com/512/3058/3058995.png" alt="Multiplexing" class="feature-img">
+                            <span class="feature-name">Multiplexing Support</span>
+                            <div class="feature-desc">Digital systems easily support multiplexing techniques (TDM, FDM) allowing multiple signals to share the same transmission medium simultaneously.</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <img src="https://cdn-icons-png.flaticon.com/512/3058/3058032.png" alt="Error Correction" class="feature-img">
+                            <span class="feature-name">Error Detection/Correction</span>
+                            <div class="feature-desc">Digital systems can implement sophisticated error detection and correction algorithms (like Hamming codes) to identify and fix transmission errors automatically.</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <img src="https://cdn-icons-png.flaticon.com/512/1086/1086741.png" alt="Integration" class="feature-img">
+                            <span class="feature-name">Digital System Integration</span>
+                            <div class="feature-desc">Digital signals are compatible with modern computing systems, allowing seamless integration with networks, storage systems, and digital processing equipment.</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <img src="https://cdn-icons-png.flaticon.com/512/3163/3163478.png" alt="Signal Quality" class="feature-img">
+                            <span class="feature-name">Better Signal Quality</span>
+                            <div class="feature-desc">Digital signals maintain their quality over long distances and through multiple processing stages, unlike analog signals which degrade with each processing step.</div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div class="section cons">
+                <div class="section-header">Disadvantages</div>
+                <table class="cons">
+                    <tr>
+                        <td>
+                            <img src="https://cdn-icons-png.flaticon.com/512/2933/2933245.png" alt="Bandwidth" class="feature-img">
+                            <span class="feature-name">Higher Bandwidth Needs</span>
+                            <div class="feature-desc">Digital transmission typically requires more bandwidth than analog to carry the same information, especially for high-fidelity signals like video.</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <img src="https://cdn-icons-png.flaticon.com/512/3659/3659898.png" alt="Complexity" class="feature-img">
+                            <span class="feature-name">Complex System Design</span>
+                            <div class="feature-desc">Digital systems require more complex circuitry including ADCs, DACs, and digital signal processors, increasing design complexity and component count.</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <img src="https://cdn-icons-png.flaticon.com/512/3161/3161830.png" alt="Latency" class="feature-img">
+                            <span class="feature-name">Signal Processing Delay</span>
+                            <div class="feature-desc">Digital systems introduce latency due to processing time for analog-to-digital conversion, encoding, decoding, and error correction algorithms.</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <img src="https://cdn-icons-png.flaticon.com/512/3132/3132693.png" alt="Cost" class="feature-img">
+                            <span class="feature-name">Higher Implementation Cost</span>
+                            <div class="feature-desc">The initial setup cost for digital infrastructure is typically higher than analog systems due to more sophisticated hardware requirements.</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <img src="https://cdn-icons-png.flaticon.com/512/2936/2936886.png" alt="Errors" class="feature-img">
+                            <span class="feature-name">Quantization Errors</span>
+                            <div class="feature-desc">The analog-to-digital conversion process introduces quantization noise and errors that can never be completely eliminated, only minimized.</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <img src="https://cdn-icons-png.flaticon.com/512/3058/3058995.png" alt="Sync" class="feature-img">
+                            <span class="feature-name">Synchronization Needs</span>
+                            <div class="feature-desc">Digital systems require precise synchronization between transmitter and receiver clocks, adding complexity to system design and maintenance.</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <img src="https://cdn-icons-png.flaticon.com/512/3163/3163478.png" alt="Signal Loss" class="feature-img">
+                            <span class="feature-name">Complete Signal Loss</span>
+                            <div class="feature-desc">Unlike analog signals that degrade gradually, digital signals fail completely when the signal-to-noise ratio falls below a critical threshold.</div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add hover effect to table rows
+        document.querySelectorAll('tr').forEach(row => {
+            row.addEventListener('mouseenter', function() {
+                this.style.backgroundColor = '#f8f9fa';
+                this.style.cursor = 'pointer';
+                this.style.transform = 'scale(1.01)';
+                this.style.transition = 'all 0.2s ease';
+            });
+            
+            row.addEventListener('mouseleave', function() {
+                this.style.backgroundColor = '';
+                this.style.transform = '';
+            });
+        });
+    </script>
+</body>
+</html>
