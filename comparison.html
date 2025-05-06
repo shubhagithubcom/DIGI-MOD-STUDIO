@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Modulation Techniques Comparison</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --accent: #e74c3c;
+            --success: #2ecc71;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1.5rem 0;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .comparison-controls {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin: 2rem 0;
+        }
+        
+        .select-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .select-group {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--primary);
+        }
+        
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        
+        button {
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            display: block;
+            margin: 0 auto;
+        }
+        
+        button:hover {
+            background-color: var(--primary);
+        }
+        
+        .comparison-result {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            overflow-x: auto;
+        }
+        
+        .comparison-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--primary);
+        }
+        
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            min-width: 800px;
+        }
+        
+        .criteria {
+            font-weight: 600;
+            color: var(--primary);
+            border-bottom: 1px solid #eee;
+            padding-bottom: 8px;
+        }
+        
+        .tech1, .tech2 {
+            text-align: center;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        
+        .tech1 {
+            background-color: rgba(52, 152, 219, 0.1);
+        }
+        
+        .tech2 {
+            background-color: rgba(46, 204, 113, 0.1);
+        }
+        
+        .advantage {
+            font-weight: 600;
+            color: var(--success);
+        }
+        
+        .disadvantage {
+            font-weight: 600;
+            color: var(--accent);
+        }
+        
+        .applications {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .app-list {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 1rem;
+        }
+        
+        .app-card {
+            flex: 1;
+            min-width: 200px;
+            background-color: var(--light);
+            padding: 15px;
+            border-radius: 4px;
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 1.5rem 0;
+            margin-top: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .criteria {
+                display: none;
+            }
+            
+            .tech1, .tech2 {
+                text-align: left;
+                margin-bottom: 15px;
+            }
+            
+            .tech1::before {
+                content: "Technique 1: ";
+                font-weight: bold;
+            }
+            
+            .tech2::before {
+                content: "Technique 2: ";
+                font-weight: bold;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Digital Modulation Techniques Comparison</h1>
+            <p>Compare different modulation schemes and their characteristics</p>
+        </div>
+    </header>
+    
+    <main class="container">
+        <div class="comparison-controls">
+            <h2>Select Two Techniques to Compare</h2>
+            <div class="select-container">
+                <div class="select-group">
+                    <label for="technique1">First Technique:</label>
+                    <select id="technique1">
+                        <option value="ask" selected>ASK (Amplitude Shift Keying)</option>
+                        <option value="fsk">FSK (Frequency Shift Keying)</option>
+                        <option value="bfsk">BFSK (Binary FSK)</option>
+                        <option value="bpsk">BPSK (Binary Phase Shift Keying)</option>
+                        <option value="dpsk">DPSK (Differential PSK)</option>
+                        <option value="qpsk">QPSK (Quadrature PSK)</option>
+                        <option value="qam">QAM (Quadrature Amplitude Modulation)</option>
+                        <option value="pam">PAM (Pulse Amplitude Modulation)</option>
+                        <option value="ofdm">OFDM (Orthogonal Frequency Division Multiplexing)</option>
+                    </select>
+                </div>
+                
+                <div class="select-group">
+                    <label for="technique2">Second Technique:</label>
+                    <select id="technique2">
+                        <option value="ask">ASK (Amplitude Shift Keying)</option>
+                        <option value="fsk" selected>FSK (Frequency Shift Keying)</option>
+                        <option value="bfsk">BFSK (Binary FSK)</option>
+                        <option value="bpsk">BPSK (Binary Phase Shift Keying)</option>
+                        <option value="dpsk">DPSK (Differential PSK)</option>
+                        <option value="qpsk">QPSK (Quadrature PSK)</option>
+                        <option value="qam">QAM (Quadrature Amplitude Modulation)</option>
+                        <option value="pam">PAM (Pulse Amplitude Modulation)</option>
+                        <option value="ofdm">OFDM (Orthogonal Frequency Division Multiplexing)</option>
+                    </select>
+                </div>
+            </div>
+            
+            <button id="compare-btn">Compare Techniques</button>
+        </div>
+        
+        <div id="results-section" style="display: none;">
+            <div class="comparison-result">
+                <h2 class="comparison-header">Comparison of <span id="tech1-name"></span> vs <span id="tech2-name"></span></h2>
+                
+                <div class="comparison-grid">
+                    <div class="criteria">Characteristic</div>
+                    <div class="criteria"><span id="tech1-name-header"></span></div>
+                    <div class="criteria"><span id="tech2-name-header"></span></div>
+                    
+                    <div>Modulation Type</div>
+                    <div class="tech1" id="tech1-type"></div>
+                    <div class="tech2" id="tech2-type"></div>
+                    
+                    <div>Bits per Symbol</div>
+                    <div class="tech1" id="tech1-bits"></div>
+                    <div class="tech2" id="tech2-bits"></div>
+                    
+                    <div>Bandwidth Efficiency</div>
+                    <div class="tech1" id="tech1-bandwidth"></div>
+                    <div class="tech2" id="tech2-bandwidth"></div>
+                    
+                    <div>Power Efficiency</div>
+                    <div class="tech1" id="tech1-power"></div>
+                    <div class="tech2" id="tech2-power"></div>
+                    
+                    <div>Complexity</div>
+                    <div class="tech1" id="tech1-complexity"></div>
+                    <div class="tech2" id="tech2-complexity"></div>
+                    
+                    <div>Error Performance (BER)</div>
+                    <div class="tech1" id="tech1-error"></div>
+                    <div class="tech2" id="tech2-error"></div>
+                    
+                    <div>Synchronization Requirement</div>
+                    <div class="tech1" id="tech1-sync"></div>
+                    <div class="tech2" id="tech2-sync"></div>
+                    
+                    <div>Implementation Cost</div>
+                    <div class="tech1" id="tech1-cost"></div>
+                    <div class="tech2" id="tech2-cost"></div>
+                    
+                    <div>Spectral Efficiency (bps/Hz)</div>
+                    <div class="tech1" id="tech1-spectral"></div>
+                    <div class="tech2" id="tech2-spectral"></div>
+                    
+                    <div>Robustness to Noise</div>
+                    <div class="tech1" id="tech1-noise"></div>
+                    <div class="tech2" id="tech2-noise"></div>
+                    
+                    <div>Multi-path Resistance</div>
+                    <div class="tech1" id="tech1-multipath"></div>
+                    <div class="tech2" id="tech2-multipath"></div>
+                    
+                    <div>Peak-to-Average Power Ratio</div>
+                    <div class="tech1" id="tech1-papr"></div>
+                    <div class="tech2" id="tech2-papr"></div>
+                </div>
+            </div>
+            
+            <div class="applications">
+                <h2>Typical Applications</h2>
+                <p>Common uses of these modulation techniques in real-world systems:</p>
+                
+                <div class="app-list">
+                    <div class="app-card">
+                        <h3><span id="tech1-name-app"></span></h3>
+                        <ul id="tech1-apps">
+                            <!-- Filled by JavaScript -->
+                        </ul>
+                    </div>
+                    
+                    <div class="app-card">
+                        <h3><span id="tech2-name-app"></span></h3>
+                        <ul id="tech2-apps">
+                            <!-- Filled by JavaScript -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Digital Modulation Comparison Tool. All rights reserved.</p>
+            <p style="margin-top: 10px;">Educational purpose only.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Technique data
+        const techniques = {
+            ask: {
+                name: "ASK",
+                fullName: "Amplitude Shift Keying",
+                type: "Digital (Amplitude)",
+                bits: "1 bit/symbol",
+                bandwidth: "Low",
+                power: "Low",
+                complexity: "Very Low",
+                error: "Poor",
+                sync: "Low",
+                cost: "Very Low",
+                spectral: "Low (≤1)",
+                noise: "Poor",
+                multipath: "Poor",
+                papr: "Low",
+                apps: [
+                    "Optical Communications",
+                    "RFID Systems",
+                    "Low-cost Wireless Devices",
+                    "OOK (On-Off Keying) Variant"
+                ]
+            },
+            fsk: {
+                name: "FSK",
+                fullName: "Frequency Shift Keying",
+                type: "Digital (Frequency)",
+                bits: "1 bit/symbol",
+                bandwidth: "High",
+                power: "Medium",
+                complexity: "Low",
+                error: "Good",
+                sync: "Medium",
+                cost: "Low",
+                spectral: "Low (≤1)",
+                noise: "Good",
+                multipath: "Fair",
+                papr: "Medium",
+                apps: [
+                    "Low-speed Wireless",
+                    "Telemetry Systems",
+                    "Paging Systems",
+                    "Some RFID Systems"
+                ]
+            },
+            bfsk: {
+                name: "BFSK",
+                fullName: "Binary Frequency Shift Keying",
+                type: "Digital (Frequency)",
+                bits: "1 bit/symbol",
+                bandwidth: "High",
+                power: "Medium",
+                complexity: "Low",
+                error: "Good",
+                sync: "Medium",
+                cost: "Low",
+                spectral: "Low (≤1)",
+                noise: "Good",
+                multipath: "Fair",
+                papr: "Medium",
+                apps: [
+                    "Military Communications",
+                    "Satellite Communications",
+                    "Some Wireless Sensor Networks",
+                    "Industrial Control Systems"
+                ]
+            },
+            bpsk: {
+                name: "BPSK",
+                fullName: "Binary Phase Shift Keying",
+                type: "Digital (Phase)",
+                bits: "1 bit/symbol",
+                bandwidth: "Low",
+                power: "High",
+                complexity: "Low",
+                error: "Excellent",
+                sync: "High",
+                cost: "Low",
+                spectral: "Low (≤1)",
+                noise: "Excellent",
+                multipath: "Fair",
+                papr: "Low",
+                apps: [
+                    "Deep Space Communications",
+                    "Satellite Communications",
+                    "RFID Systems",
+                    "Low-Speed Wireless"
+                ]
+            },
+            dpsk: {
+                name: "DPSK",
+                fullName: "Differential Phase Shift Keying",
+                type: "Digital (Phase)",
+                bits: "1 bit/symbol",
+                bandwidth: "Low",
+                power: "High",
+                complexity: "Medium",
+                error: "Good (slightly worse than BPSK)",
+                sync: "Low (differential encoding)",
+                cost: "Medium",
+                spectral: "Low (≤1)",
+                noise: "Good",
+                multipath: "Fair",
+                papr: "Low",
+                apps: [
+                    "Wireless LANs",
+                    "Some Cellular Systems",
+                    "Bluetooth (Basic Rate)",
+                    "Optical Communications"
+                ]
+            },
+            qpsk: {
+                name: "QPSK",
+                fullName: "Quadrature Phase Shift Keying",
+                type: "Digital (Phase)",
+                bits: "2 bits/symbol",
+                bandwidth: "Medium",
+                power: "High",
+                complexity: "Medium",
+                error: "Good",
+                sync: "High",
+                cost: "Medium",
+                spectral: "Medium (~2)",
+                noise: "Good",
+                multipath: "Fair",
+                papr: "Low",
+                apps: [
+                    "Satellite Communications",
+                    "Cellular Networks (CDMA, LTE)",
+                    "Wi-Fi (802.11)",
+                    "Digital Video Broadcasting"
+                ]
+            },
+            qam: {
+                name: "QAM",
+                fullName: "Quadrature Amplitude Modulation",
+                type: "Digital (Amplitude+Phase)",
+                bits: "4-10 bits/symbol (typical)",
+                bandwidth: "High",
+                power: "Medium",
+                complexity: "High",
+                error: "Fair (depends on order)",
+                sync: "Very High",
+                cost: "High",
+                spectral: "High (4-10)",
+                noise: "Fair to Poor",
+                multipath: "Fair",
+                papr: "High",
+                apps: [
+                    "Cable Modems (16-QAM, 64-QAM)",
+                    "Wi-Fi (802.11n/ac 256-QAM)",
+                    "Digital TV (64-QAM, 256-QAM)",
+                    "5G Networks (up to 1024-QAM)"
+                ]
+            },
+            pam: {
+                name: "PAM",
+                fullName: "Pulse Amplitude Modulation",
+                type: "Digital (Amplitude)",
+                bits: "2-8 bits/symbol",
+                bandwidth: "Medium",
+                power: "Medium",
+                complexity: "Medium",
+                error: "Fair",
+                sync: "Medium",
+                cost: "Medium",
+                spectral: "Medium (2-8)",
+                noise: "Fair",
+                multipath: "Poor",
+                papr: "Medium",
+                apps: [
+                    "Ethernet (100BASE-TX)",
+                    "Digital Subscriber Line (DSL)",
+                    "Some Optical Communications",
+                    "Industrial Control Systems"
+                ]
+            },
+            ofdm: {
+                name: "OFDM",
+                fullName: "Orthogonal Frequency Division Multiplexing",
+                type: "Digital (Multi-Carrier)",
+                bits: "Varies with subcarrier modulation",
+                bandwidth: "Very High",
+                power: "Medium",
+                complexity: "Very High",
+                error: "Good (with coding)",
+                sync: "Very High",
+                cost: "Very High",
+                spectral: "Very High",
+                noise: "Good",
+                multipath: "Excellent",
+                papr: "Very High",
+                apps: [
+                    "Wi-Fi (802.11a/g/n/ac/ax)",
+                    "4G/LTE, 5G Cellular",
+                    "Digital TV (DVB-T, DAB)",
+                    "Power-line Communications"
+                ]
+            }
+        };
+        
+        document.getElementById('compare-btn').addEventListener('click', function() {
+            const tech1 = document.getElementById('technique1').value;
+            const tech2 = document.getElementById('technique2').value;
+            
+            if (tech1 === tech2) {
+                alert("Please select two different techniques to compare.");
+                return;
+            }
+            
+            // Update comparison table
+            document.getElementById('tech1-name').textContent = techniques[tech1].name;
+            document.getElementById('tech2-name').textContent = techniques[tech2].name;
+            document.getElementById('tech1-name-header').textContent = techniques[tech1].fullName;
+            document.getElementById('tech2-name-header').textContent = techniques[tech2].fullName;
+            
+            document.getElementById('tech1-type').textContent = techniques[tech1].type;
+            document.getElementById('tech2-type').textContent = techniques[tech2].type;
+            
+            document.getElementById('tech1-bits').textContent = techniques[tech1].bits;
+            document.getElementById('tech2-bits').textContent = techniques[tech2].bits;
+            
+            document.getElementById('tech1-bandwidth').textContent = techniques[tech1].bandwidth;
+            document.getElementById('tech2-bandwidth').textContent = techniques[tech2].bandwidth;
+            
+            document.getElementById('tech1-power').textContent = techniques[tech1].power;
+            document.getElementById('tech2-power').textContent = techniques[tech2].power;
+            
+            document.getElementById('tech1-complexity').textContent = techniques[tech1].complexity;
+            document.getElementById('tech2-complexity').textContent = techniques[tech2].complexity;
+            
+            document.getElementById('tech1-error').textContent = techniques[tech1].error;
+            document.getElementById('tech2-error').textContent = techniques[tech2].error;
+            
+            document.getElementById('tech1-sync').textContent = techniques[tech1].sync;
+            document.getElementById('tech2-sync').textContent = techniques[tech2].sync;
+            
+            document.getElementById('tech1-cost').textContent = techniques[tech1].cost;
+            document.getElementById('tech2-cost').textContent = techniques[tech2].cost;
+            
+            document.getElementById('tech1-spectral').textContent = techniques[tech1].spectral;
+            document.getElementById('tech2-spectral').textContent = techniques[tech2].spectral;
+            
+            document.getElementById('tech1-noise').textContent = techniques[tech1].noise;
+            document.getElementById('tech2-noise').textContent = techniques[tech2].noise;
+            
+            document.getElementById('tech1-multipath').textContent = techniques[tech1].multipath;
+            document.getElementById('tech2-multipath').textContent = techniques[tech2].multipath;
+            
+            document.getElementById('tech1-papr').textContent = techniques[tech1].papr;
+            document.getElementById('tech2-papr').textContent = techniques[tech2].papr;
+            
+            // Update applications
+            document.getElementById('tech1-name-app').textContent = techniques[tech1].fullName;
+            document.getElementById('tech2-name-app').textContent = techniques[tech2].fullName;
+            
+            const tech1AppsList = document.getElementById('tech1-apps');
+            tech1AppsList.innerHTML = '';
+            techniques[tech1].apps.forEach(app => {
+                const li = document.createElement('li');
+                li.textContent = app;
+                tech1AppsList.appendChild(li);
+            });
+            
+            const tech2AppsList = document.getElementById('tech2-apps');
+            tech2AppsList.innerHTML = '';
+            techniques[tech2].apps.forEach(app => {
+                const li = document.createElement('li');
+                li.textContent = app;
+                tech2AppsList.appendChild(li);
+            });
+            
+            // Show results section
+            document.getElementById('results-section').style.display = 'block';
+            
+            // Scroll to results
+            document.getElementById('results-section').scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
